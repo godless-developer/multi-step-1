@@ -6,6 +6,7 @@ export const Input = ({
   type,
   error,
   handleKeyDown,
+  value,
 }) => {
   return (
     <div className="flex flex-col">
@@ -15,6 +16,7 @@ export const Input = ({
       </label>
       <input
         type={type}
+        value={value}
         name={name}
         onChange={handleChange}
         placeholder={placeholder}

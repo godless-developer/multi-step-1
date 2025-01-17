@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./Button";
 import { Input } from "./Input";
 import { JoinUs } from "./JoinUs";
@@ -22,6 +22,11 @@ export const SecondPage = ({ click, setCurrentStep }) => {
     setFormErrors((prev) => ({ ...prev, [name]: "" }));
     setFormValues((prev) => ({ ...prev, [name]: value }));
   };
+
+  useEffect(() => {
+    const savedValue = JSON.parse(localStorage.getItem("secondPage"));
+    setFormValues((prev) => ({ ...prev, ...savedValue }));
+  }, []);
 
   const handleClick = () => {
     let errorHave = false;
@@ -84,6 +89,11 @@ export const SecondPage = ({ click, setCurrentStep }) => {
       }));
       errorHave = true;
     }
+    if (!errorHave) {
+      localStorage.setItem("secondPage", JSON.stringify(formValues));
+      // localStorage.setItem("currentPage , 1");
+      setCurrentStep(click + 1);
+    }
   };
   const backClick = () => {
     setCurrentStep(click - 1);
@@ -97,63 +107,69 @@ export const SecondPage = ({ click, setCurrentStep }) => {
     return false;
   };
   return (
-    <div className="w-[480px] h-[655px] p-[32px] bg-[#fff] rounded-2xl font-sans flex flex-col justify-between ">
-      <div>
-        <JoinUs />
-        <div className="mt-[22px] flex flex-col gap-2">
-          <Input
-            label="Email "
-            type="email"
-            placeholder="Your email address"
-            name="email"
-            handleChange={handleChange}
-            error={formErrors.email}
+    <>
+      <div className="w-[480px] h-[655px] p-[32px] bg-[#fff] rounded-2xl font-sans flex flex-col justify-between ">
+        <div>
+          <JoinUs />
+          <div className="mt-[22px] flex flex-col gap-2">
+            <Input
+              label="Email "
+              type="email"
+              placeholder="Your email address"
+              name="email"
+              handleChange={handleChange}
+              error={formErrors.email}
+              value={formValues.email}
+            />
+            <Input
+              label="Phone number "
+              type="tel"
+              name="phone"
+              placeholder="Your phone number"
+              handleChange={handleChange}
+              error={formErrors.phone}
+              value={formValues.phone}
+            />
+            <Input
+              label="Password "
+              type="password"
+              name="password"
+              placeholder="Your password"
+              handleChange={handleChange}
+              error={formErrors.password}
+              value={formValues.password}
+            />
+            <Input
+              label="Confirm password "
+              type="password"
+              name="confirm"
+              placeholder="Confirm password"
+              handleChange={handleChange}
+              error={formErrors.confirm}
+              value={formValues.confirm}
+            />
+          </div>
+        </div>
+        <div className="flex gap-3">
+          <Button
+            ButName="Back"
+            handleClick={backClick}
+            width="w-[30%]"
+            bg="bg-[#ffffff]"
+            text="text-black"
+            border="border-black"
+            borderS="border-[0.5px]"
           />
-          <Input
-            label="Phone number "
-            type="tel"
-            name="phone"
-            placeholder="Your phone number"
-            handleChange={handleChange}
-            error={formErrors.phone}
-          />
-          <Input
-            label="Password "
-            type="password"
-            name="password"
-            placeholder="Your password"
-            handleChange={handleChange}
-            error={formErrors.password}
-          />
-          <Input
-            label="Confirm password "
-            type="password"
-            name="confirm"
-            placeholder="Confirm password"
-            handleChange={handleChange}
-            error={formErrors.confirm}
+          <Button
+            ButName="Continue 2/3"
+            handleClick={handleClick}
+            width="w-[70%]"
+            bg="bg-black"
+            text="text-white"
+            handleKeyDown={handleKeyDown}
           />
         </div>
       </div>
-      <div className="flex gap-3">
-        <Button
-          ButName="Back"
-          handleClick={backClick}
-          width="w-[30%]"
-          bg="bg-[#ffffff]"
-          text="text-black"
-          border="border-black"
-          borderS="border-[0.5px]"
-        />
-        <Button
-          ButName="Continue 2/3"
-          handleClick={handleClick}
-          width="w-[70%]"
-          bg="bg-black"
-          text="text-white"
-          handleKeyDown={handleKeyDown}
-        />
-      </div>
-    </div>
+    </>
   );
 };
