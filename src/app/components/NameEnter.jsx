@@ -32,7 +32,7 @@ export const NameEnter = ({ click, setCurrentStep }) => {
     if (!firstName.trim()) {
       setFormErrors((prev) => ({
         ...prev,
-        firstName: "Please enter your first name !",
+        firstName: "Нэрээ оруулна уу",
       }));
       errorHave = true;
     }
@@ -40,7 +40,7 @@ export const NameEnter = ({ click, setCurrentStep }) => {
     if (!lastName.trim()) {
       setFormErrors((prev) => ({
         ...prev,
-        lastName: "Please enter your last name !",
+        lastName: "Овгоо оруулна уу.",
       }));
       errorHave = true;
     }
@@ -48,7 +48,7 @@ export const NameEnter = ({ click, setCurrentStep }) => {
     if (!userName.trim()) {
       setFormErrors((prev) => ({
         ...prev,
-        userName: "Please enter your username !",
+        userName: "Хэрэглэгчийн нэрээ оруулна уу",
       }));
       errorHave = true;
     }
@@ -61,6 +61,11 @@ export const NameEnter = ({ click, setCurrentStep }) => {
       localStorage.setItem("firstPage", JSON.stringify(formValues));
       localStorage.setItem("currentPage", 1);
       setCurrentStep(click + 1);
+    }
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleClick();
     }
   };
 
@@ -78,15 +83,17 @@ export const NameEnter = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               name="firstName"
               value={formValues.firstName}
+              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Last name "
               placeholder="Your last name"
               type="text"
-              error={formErrors.firstName}
+              error={formErrors.lastName}
               handleChange={handleChange}
               name="lastName"
-              value={formValues.firstName}
+              value={formValues.lastName}
+              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Username "
@@ -96,6 +103,7 @@ export const NameEnter = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               name="userName"
               value={formValues.userName}
+              handleKeyDown={handleKeyDown}
             />
           </div>
         </div>
@@ -105,6 +113,7 @@ export const NameEnter = ({ click, setCurrentStep }) => {
           bg="bg-black"
           text="text-white"
           width="w-[100%]"
+          borderR="rounded-xl"
         />
       </div>
     </>

@@ -38,13 +38,13 @@ export const SecondPage = ({ click, setCurrentStep }) => {
     if (!email.trim()) {
       setFormErrors((prev) => ({
         ...prev,
-        email: "Please enter your email !",
+        email: "Мэйл хаягаа оруулна уу",
       }));
       errorHave = true;
     } else if (!patternEmail.test(email)) {
       setFormErrors((prev) => ({
         ...prev,
-        email: "Email buruu bnaa",
+        email: "Зөв мэйл хаяг оруулна уу",
       }));
       errorHave = true;
     }
@@ -52,13 +52,13 @@ export const SecondPage = ({ click, setCurrentStep }) => {
     if (!phone.trim()) {
       setFormErrors((prev) => ({
         ...prev,
-        phone: "Please enter your phone number !",
+        phone: "Утасны дугаараа оруулна уу",
       }));
       errorHave = true;
     } else if (!patternNumber.test(phone)) {
       setFormErrors((prev) => ({
         ...prev,
-        phone: "dugaar buruu bna",
+        phone: "Зөв утасны дугаар оруулна уу",
       }));
       errorHave = true;
     }
@@ -66,32 +66,31 @@ export const SecondPage = ({ click, setCurrentStep }) => {
     if (!password.trim()) {
       setFormErrors((prev) => ({
         ...prev,
-        password: "Please enter your password !",
+        password: "Нууц үгээ оруулна уу",
       }));
       errorHave = true;
     } else if (password.length <= 5) {
       setFormErrors((prev) => ({
         ...prev,
-        password: "hamgiin bagadaa 6 oron bna",
+        password: "6 оронтой тоо оруулна уу",
       }));
       errorHave = true;
     }
     if (!confirm.trim()) {
       setFormErrors((prev) => ({
         ...prev,
-        confirm: "Please enter your password !",
+        confirm: "Нууц үгээ давтаж оруулна уу",
       }));
       errorHave = true;
     } else if (password !== confirm) {
       setFormErrors((prev) => ({
         ...prev,
-        confirm: "password taarahgvi bna",
+        confirm: "Таны оруулсан нууц үг таарахгүй байна.",
       }));
       errorHave = true;
     }
     if (!errorHave) {
       localStorage.setItem("secondPage", JSON.stringify(formValues));
-      // localStorage.setItem("currentPage , 1");
       setCurrentStep(click + 1);
     }
   };
@@ -99,13 +98,11 @@ export const SecondPage = ({ click, setCurrentStep }) => {
     setCurrentStep(click - 1);
   };
   const handleKeyDown = (e) => {
-    if (e.key == "Enter") {
-      if (!errorHave) {
-        setCurrentStep(click + 1);
-      }
+    if (e.key === "Enter") {
+      handleClick();
     }
-    return false;
   };
+
   return (
     <>
       <div className="w-[480px] h-[655px] p-[32px] bg-[#fff] rounded-2xl font-sans flex flex-col justify-between ">
@@ -120,6 +117,7 @@ export const SecondPage = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               error={formErrors.email}
               value={formValues.email}
+              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Phone number "
@@ -129,6 +127,7 @@ export const SecondPage = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               error={formErrors.phone}
               value={formValues.phone}
+              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Password "
@@ -138,6 +137,7 @@ export const SecondPage = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               error={formErrors.password}
               value={formValues.password}
+              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Confirm password "
@@ -147,6 +147,7 @@ export const SecondPage = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               error={formErrors.confirm}
               value={formValues.confirm}
+              handleKeyDown={handleKeyDown}
             />
           </div>
         </div>
@@ -159,6 +160,7 @@ export const SecondPage = ({ click, setCurrentStep }) => {
             text="text-black"
             border="border-black"
             borderS="border-[0.5px]"
+            borderR="rounded-xl"
           />
           <Button
             ButName="Continue 2/3"
@@ -166,7 +168,7 @@ export const SecondPage = ({ click, setCurrentStep }) => {
             width="w-[70%]"
             bg="bg-black"
             text="text-white"
-            handleKeyDown={handleKeyDown}
+            borderR="rounded-xl"
           />
         </div>
       </div>

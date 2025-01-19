@@ -5,8 +5,8 @@ export const Input = ({
   name,
   type,
   error,
-  handleKeyDown,
   value,
+  handleKeyDown,
 }) => {
   return (
     <div className="flex flex-col">
