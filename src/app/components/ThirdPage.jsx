@@ -15,7 +15,6 @@ export const ThirdPage = ({ click, setCurrentStep }) => {
   };
 
   useEffect(() => {
-    // Retrieve form values and image URL from localStorage
     const savedValue = JSON.parse(localStorage.getItem("thirdPage"));
     const savedImageUrl = localStorage.getItem("imageUrl");
 
@@ -87,7 +86,7 @@ export const ThirdPage = ({ click, setCurrentStep }) => {
           ...prev,
           image: "Please upload a valid image file.",
         }));
-        setImageUrl(null); // Reset the image URL
+        setImageUrl(null);
       } else {
         const uploadedImageUrl = URL.createObjectURL(file);
         setImageUrl(uploadedImageUrl);
