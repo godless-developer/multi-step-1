@@ -30,7 +30,6 @@ export const ThirdPage = ({ click, setCurrentStep }) => {
     let errorHave = false;
     const { date } = formValues;
 
-    // Date of birth validation
     if (!date.trim()) {
       setFormErrors((prev) => ({
         ...prev,
@@ -56,7 +55,6 @@ export const ThirdPage = ({ click, setCurrentStep }) => {
       }
     }
 
-    // Image validation
     if (!imageUrl) {
       setFormErrors((prev) => ({
         ...prev,
@@ -66,7 +64,6 @@ export const ThirdPage = ({ click, setCurrentStep }) => {
     }
 
     if (!errorHave) {
-      // Save form data and image URL to localStorage
       localStorage.setItem("thirdPage", JSON.stringify(formValues));
       localStorage.setItem("imageUrl", imageUrl);
       setCurrentStep(click + 1);
@@ -94,11 +91,6 @@ export const ThirdPage = ({ click, setCurrentStep }) => {
       }
     }
   };
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleClick();
-    }
-  };
 
   return (
     <div className="w-[480px] p-[32px] bg-[#fff] rounded-xl font-sans flex flex-col justify-between">
@@ -111,7 +103,6 @@ export const ThirdPage = ({ click, setCurrentStep }) => {
           handleChange={handleChange}
           name="date"
           error={formErrors.date}
-          handleKeyDown={handleKeyDown}
         />
       </div>
       <div className="mt-1 flex gap-1">
@@ -129,13 +120,7 @@ export const ThirdPage = ({ click, setCurrentStep }) => {
           htmlFor="file-input"
           className="bg-gray-100 rounded-xl w-full h-[180px] flex flex-col justify-center items-center cursor-pointer border-[1px] border-gray"
         >
-          <input
-            hidden
-            type="file"
-            id="file-input"
-            onChange={onFileUpload}
-            handleKeyDown={handleKeyDown}
-          />
+          <input hidden type="file" id="file-input" onChange={onFileUpload} />
           {!imageUrl ? (
             <div className="flex flex-col justify-center items-center gap-2">
               <div className="w-7 h-7 bg-white rounded-full flex justify-center items-center">

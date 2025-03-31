@@ -63,11 +63,6 @@ export const NameEnter = ({ click, setCurrentStep }) => {
       setCurrentStep(click + 1);
     }
   };
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleClick();
-    }
-  };
 
   return (
     <>
@@ -83,7 +78,6 @@ export const NameEnter = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               name="firstName"
               value={formValues.firstName}
-              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Last name "
@@ -93,7 +87,6 @@ export const NameEnter = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               name="lastName"
               value={formValues.lastName}
-              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Username "
@@ -103,7 +96,6 @@ export const NameEnter = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               name="userName"
               value={formValues.userName}
-              handleKeyDown={handleKeyDown}
             />
           </div>
         </div>

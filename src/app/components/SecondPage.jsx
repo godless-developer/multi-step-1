@@ -97,11 +97,6 @@ export const SecondPage = ({ click, setCurrentStep }) => {
   const backClick = () => {
     setCurrentStep(click - 1);
   };
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleClick();
-    }
-  };
 
   return (
     <>
@@ -117,7 +112,6 @@ export const SecondPage = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               error={formErrors.email}
               value={formValues.email}
-              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Phone number "
@@ -127,7 +121,6 @@ export const SecondPage = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               error={formErrors.phone}
               value={formValues.phone}
-              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Password "
@@ -137,7 +130,6 @@ export const SecondPage = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               error={formErrors.password}
               value={formValues.password}
-              handleKeyDown={handleKeyDown}
             />
             <Input
               label="Confirm password "
@@ -147,7 +139,6 @@ export const SecondPage = ({ click, setCurrentStep }) => {
               handleChange={handleChange}
               error={formErrors.confirm}
               value={formValues.confirm}
-              handleKeyDown={handleKeyDown}
             />
           </div>
         </div>

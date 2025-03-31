@@ -17,7 +17,6 @@ export default function Home() {
   }, []);
   return (
     <div>
-      
       <AnimatePresence initial={false}>
         <motion.div
           className="bg-[#f4f4f4] w-[100vw] h-[100vh] flex items-center justify-center"
@@ -27,7 +26,6 @@ export default function Home() {
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          
           <FormSteps
             currentStep={currentStep}
             click={currentStep}
